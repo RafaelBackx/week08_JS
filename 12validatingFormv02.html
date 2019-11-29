@@ -4,44 +4,47 @@
     <meta charset="UTF-8">
     <title>Validating Form</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        div#container form {
+            width: 100%;
+        }
+
+        div#container form p {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            grid-template-areas: "label input message";
+            grid-column-gap: 1em;
+            grid-row-gap: 1em;
+            justify-items: end;
+            box-sizing: border-box;
+        }
+
+        div#container form label {
+            grid-area: label;
+            line-height: 1.7em;
+        }
+
+        div#container form input {
+            grid-area: input;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        div#container form span {
+            grid-area: message;
+            width: 100%;
+            line-height: 1.7em;
+            font-size: 70%;
+            padding: 3px;
+        }
+
+        span.hidden {
+            display: none;
+        }
+    </style>
 </head>
-<style>
-    div#container form {
-        width: 100%;
-    }
-    div#container form p{
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        grid-template-areas: "label input message";
-        grid-column-gap: 1em;
-        grid-row-gap: 1em;
-        justify-items: end;
-        box-sizing: border-box;
-    }
-
-    div#container form label {
-        grid-area: label;
-        line-height: 1.7em;
-    }
-
-    div#container form input {
-        grid-area: input;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    div#container form span {
-        grid-area: message;
-        width: 100%;
-        line-height: 1.7em;
-        font-size: 70%;
-        padding: 3px;
-    }
-    span.hidden {
-        display: none;
-    }
-</style>
 <body>
 <div id="container">
     <h2>Validating form</h2>
@@ -142,7 +145,7 @@
             }
         }
         if (validity.rangeUnderflow) {
-                return "The minimal age is 10 year";
+            return "The minimal age is 10 year";
         }
         return "Please complete the form correct";
     }
@@ -153,12 +156,13 @@
      * @param field
      */
     function removeError(field) {
-        if (field.classList != null && field.classList.length > 0) {
-            field.classList.remove("error");
-            let id = field.id;
-            let message = document.getElementById("error-for-" + id);
-            if (message != null)
-                message.innerText="";
+        let id = field.id;
+        let message = document.getElementById("errorFor-" + id);
+        if (message != null && message.classList != null) {
+            {
+                message.innerText = "";
+                message.classList.add("hidden");
+            }
         }
     }
 
